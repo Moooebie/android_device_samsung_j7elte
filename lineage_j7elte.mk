@@ -14,10 +14,18 @@
 
 LOCAL_PATH := device/samsung/j7elte
 
-PRODUCT_MAKEFILES := \
-    $(LOCAL_PATH)/lineage_j7elte.mk
+# Inherit from those products. Most specific first.
+$(call inherit-product, $(LOCAL_PATH)/device.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_l_mr1.mk)
 
-COMMON_LUNCH_CHOICES := \
-    lineage_j7elte-user \
-    lineage_j7elte-userdebug \
-    lineage_j7elte-eng
+# Inherit common Lineage phone.
+$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+
+# Set those variables here to overwrite the inherited values.
+PRODUCT_NAME := lineage_j7elte
+PRODUCT_DEVICE := j7elte
+PRODUCT_MODEL := SM-J700F
+PRODUCT_BRAND := samsung
+PRODUCT_MANUFACTURER := samsung
+PRODUCT_GMS_CLIENTID_BASE := android-samsung
